@@ -1,13 +1,16 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using BreakInfinity;
 
 public class Controller : MonoBehaviour
 {
 
     #region Variables
-    public TMP_Text galdText;
-    public double gald;
+    public UpgradesManager upgradesManager;
+    public GameData data;
+    [SerializeField] private TMP_Text galdText;
+    [SerializeField] private TMP_Text galdClickPowerText;
     #endregion
 
     #region Unity Methods
@@ -15,17 +18,23 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        data = new GameData();
+        upgradesManager.StartUpgradeManager();
     }
 
     public void Update()
     {
-        galdText.text = gald + " Gald";
+        galdText.text = data.gald + " Gald";
+        galdClickPowerText.text = "+" + ClickPower() + " Gald";
     }
 
     public void GenerateGald()
     {
-        gald++;
+        data.gald += ClickPower();
+    }
+    public BigDouble ClickPower()
+    {
+        return 1 + data.clickUpgradeLevel;
     }
 
     #endregion
