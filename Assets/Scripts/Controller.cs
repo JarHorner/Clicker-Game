@@ -2,12 +2,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using BreakInfinity;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Controller : MonoBehaviour
 {
 
     #region Variables
-    public UpgradesManager upgradesManager;
+    public static Controller instance;
     public GameData data;
     [SerializeField] private TMP_Text galdText;
     [SerializeField] private TMP_Text galdClickPowerText;
@@ -15,11 +17,16 @@ public class Controller : MonoBehaviour
 
     #region Unity Methods
 
+    void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         data = new GameData();
-        upgradesManager.StartUpgradeManager();
+        UpgradesManager.instance.StartUpgradeManager();
     }
 
     public void Update()
@@ -36,6 +43,11 @@ public class Controller : MonoBehaviour
     {
         return 1 + data.clickUpgradeLevel;
     }
+
+    public List<T> CreateList<T>(int capacity)
+    {
+        return Enumerable.Repeat(default(T), capacity).ToList();
+    } 
 
     #endregion
 }

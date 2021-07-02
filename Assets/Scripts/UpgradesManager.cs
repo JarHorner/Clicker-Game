@@ -7,7 +7,7 @@ public class UpgradesManager : MonoBehaviour
 {
 
     #region Variables
-    public Controller controller;
+    public static UpgradesManager instance;
     public Upgrades clickUpgrade;
     public string clickUpgradeName;
     public BigDouble clickUpgradeBaseCost;
@@ -15,6 +15,10 @@ public class UpgradesManager : MonoBehaviour
     #endregion
 
     #region Unity Methods
+    void Awake()
+    {
+        instance = this;
+    }
     public void StartUpgradeManager()
     {
         clickUpgradeName = "Gald Per Click";
@@ -25,22 +29,24 @@ public class UpgradesManager : MonoBehaviour
 
     public void UpdateClickUpgradeUI()
     {
-        clickUpgrade.levelText.text = controller.data.clickUpgradeLevel.ToString();
-        clickUpgrade.CostText.text = "Cost: " + Cost() + " Gald";
+        var data = Controller.instance.data;
+        clickUpgrade.levelText.text = data.clickUpgradeLevel.ToString();
+        clickUpgrade.CostText.text = "Cost: " + Cost().ToString("F0") + " Gald";
         clickUpgrade.NameText.text = "+1 " + clickUpgradeName;
     }
 
     public BigDouble Cost()
     {
-        return clickUpgradeBaseCost * BigDouble.Pow(clickUpgradeBaseMult, controller.data.clickUpgradeLevel);
+        return clickUpgradeBaseCost * BigDouble.Pow(clickUpgradeBaseMult, Controller.instance.data.clickUpgradeLevel);
     }
 
     public void BuyUpgrade()
     {
-        if (controller.data.gald >= Cost())
+        var data = Controller.instance.data;
+        if (data.gald >= Cost())
         {
-            controller.data.gald -= Cost();
-            controller.data.clickUpgradeLevel += 1;
+            data.gald -= Cost();
+            data.clickUpgradeLevel += 1;
             UpdateClickUpgradeUI();
         }
     }
