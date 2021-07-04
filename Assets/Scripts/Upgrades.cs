@@ -6,6 +6,7 @@ public class Upgrades : MonoBehaviour
 {
 
     #region Variables
+    public int UpgradeID;
     public Image UpgradeButton;
     public TMP_Text levelText;
     public TMP_Text NameText;
@@ -13,14 +14,10 @@ public class Upgrades : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    void Start()
+    //method used in Unity engine for button to generate gald
+    public void BuyClickUpgrade()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        UpgradesManager.instance.BuyUpgrade(UpgradeID);
     }
 
     #endregion
