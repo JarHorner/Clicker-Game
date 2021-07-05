@@ -11,7 +11,9 @@ public class Controller : MonoBehaviour
     public static Controller instance;
     public GameData data;
     [SerializeField] private TMP_Text galdText;
+    [SerializeField] private TMP_Text galdPerSecondText;
     [SerializeField] private TMP_Text galdClickPowerText;
+
     #endregion
 
     #region Unity Methods
@@ -32,13 +34,26 @@ public class Controller : MonoBehaviour
     public void Update()
     {
         galdText.text = data.gald.ToString("F2") + " Gald";
+        galdPerSecondText.text = $"{GaldPerSecond():F2}/s";
         galdClickPowerText.text = "+" + ClickPower() + " Gald";
+
+        data.gald += GaldPerSecond() * Time.deltaTime;
     }
 
     //generates gald based on ClickPower
     public void GenerateGald()
     {
         data.gald += ClickPower();
+    }
+
+    public BigDouble GaldPerSecond()
+    {
+        BigDouble total = 0;
+        for (int i = 0; i < data.productionUpgradeLevel.Count; i++)
+        {
+            total += UpgradesManager.instance.productionUpgradeBasePower[i] * data.productionUpgradeLevel[i];
+        }
+        return total;
     }
 
     //starts at 1, and increases depening on amount of upgrades and the power those upgrades give

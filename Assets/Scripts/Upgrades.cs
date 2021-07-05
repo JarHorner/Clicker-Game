@@ -17,7 +17,11 @@ public class Upgrades : MonoBehaviour
     //method used in Unity engine for button to generate gald
     public void BuyClickUpgrade()
     {
-        UpgradesManager.instance.BuyUpgrade(UpgradeID);
+        UpgradesManager.instance.BuyUpgrade("click", UpgradeID);
+    }
+    public void BuyProductionUpgrade()
+    {
+        UpgradesManager.instance.BuyUpgrade("production", UpgradeID);
     }
 
     #endregion

@@ -19,7 +19,7 @@ public class Methods : MonoBehaviour
 
     //*ensures the addition of new upgrades properly (Needed when saving data)*
     //checks to see if the number of upgrades we want is greater than the actual size of the list of what is loaded in.
-    public static void UpgradeCheck<T>(ref List<T> list, int length) where T : new()
+    public static void UpgradeCheck<T>(List<T> list, int length) where T : new()
     {
         try
         {
