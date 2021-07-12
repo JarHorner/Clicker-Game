@@ -9,7 +9,9 @@ public class GameData
     #region Variables
     public BigDouble gald;
     public List<int> clickUpgradeLevel;
-    public List<int> productionUpgradeLevel;
+    public List<BigDouble> productionUpgradeLevel;
+    public List<BigDouble> productionUpgradeGenerated;
+    public List<int> generatorUpgradeLevel;
     #endregion
 
     #region Unity Methods
@@ -19,7 +21,9 @@ public class GameData
         gald = 0;
         //if you want to change # of upgrade, increase capacity and check UpgradesManager, StartUpgradeManager method
         clickUpgradeLevel = Methods.CreateList<int>(4);
-        productionUpgradeLevel = Methods.CreateList<int>(4);
+        productionUpgradeLevel = Methods.CreateList<BigDouble>(4);
+        productionUpgradeGenerated = Methods.CreateList<BigDouble>(4);
+        generatorUpgradeLevel = Methods.CreateList<int>(4);
     }
 
     #endregion

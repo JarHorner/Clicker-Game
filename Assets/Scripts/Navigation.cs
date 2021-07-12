@@ -10,32 +10,43 @@ public class Navigation : MonoBehaviour
     #region Variables
     public GameObject clickUpgradesSelected;
     public GameObject productionUpgradesSelected;
-    public TMP_Text clickupgradesTitleText;
-    public TMP_Text productionupgradesTitleText;
+    public GameObject generatorUpgradesSelected;
+    public TMP_Text clickUpgradesTitleText;
+    public TMP_Text productionUpgradesTitleText;
+    public TMP_Text generatorUpgradesTitleText;
     #endregion
 
     #region Unity Methods
     public void SwitchUpgrades(string location)
     {
-        UpgradesManager.instance.clickUpgradesScroll.gameObject.SetActive(false);
-        UpgradesManager.instance.productionUpgradesScroll.gameObject.SetActive(false);
+        UpgradesManager.instance.upgradeHandlers[0].upgradesScroll.gameObject.SetActive(false);
+        UpgradesManager.instance.upgradeHandlers[1].upgradesScroll.gameObject.SetActive(false);
+        UpgradesManager.instance.upgradeHandlers[2].upgradesScroll.gameObject.SetActive(false);
 
         clickUpgradesSelected.SetActive(false);
         productionUpgradesSelected.SetActive(false);
-        clickupgradesTitleText.color = Color.gray;
-        productionupgradesTitleText.color = Color.gray;
+        generatorUpgradesSelected.SetActive(false);
+        
+        clickUpgradesTitleText.color = Color.gray;
+        productionUpgradesTitleText.color = Color.gray;
+        generatorUpgradesTitleText.color = Color.gray;
 
         switch (location)
         {
             case "click":
-                UpgradesManager.instance.clickUpgradesScroll.gameObject.SetActive(true);
+                UpgradesManager.instance.upgradeHandlers[0].upgradesScroll.gameObject.SetActive(true);
                 clickUpgradesSelected.SetActive(true);
-                clickupgradesTitleText.color = Color.white;
+                clickUpgradesTitleText.color = Color.white;
                 break;
             case "production":
-                UpgradesManager.instance.productionUpgradesScroll.gameObject.SetActive(true);
+                UpgradesManager.instance.upgradeHandlers[1].upgradesScroll.gameObject.SetActive(true);
                 productionUpgradesSelected.SetActive(true);
-                productionupgradesTitleText.color = Color.white;
+                productionUpgradesTitleText.color = Color.white;
+                break;
+            case "generator":
+                UpgradesManager.instance.upgradeHandlers[2].upgradesScroll.gameObject.SetActive(true);
+                generatorUpgradesSelected.SetActive(true);
+                generatorUpgradesTitleText.color = Color.white;
                 break;
         }
         
